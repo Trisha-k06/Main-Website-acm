@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events - ACM SIGCHI SRM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Past Events Page Specific Styles */
+        .events-hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .events-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #1f5fd1, #1a8ecf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .events-hero p {
+            font-size: 1.2rem;
+            color: #4b5c78;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .events-section {
+            padding: 60px 0;
+            background: transparent;
+        }
+
+        .notify-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #2c7be5;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .notify-btn:hover {
+            background: #1f5fd1;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(31, 95, 209, 0.3);
+            color: white;
+        }
+
+        .event-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid #2c7be5;
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .event-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f5fd1;
+            margin: 0;
+        }
+
+        .event-date {
+            font-size: 1rem;
+            color: #6b7c96;
+            font-weight: 500;
+        }
+
+        .event-description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #4b5c78;
+            margin-bottom: 25px;
+        }
+
+        .event-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .event-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .event-gallery > div {
+            background: linear-gradient(135deg, rgba(44, 123, 229, 0.05), rgba(26, 142, 207, 0.05));
+            border: 2px dashed rgba(44, 123, 229, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event-gallery > div:hover {
+            background: linear-gradient(135deg, rgba(44, 123, 229, 0.1), rgba(26, 142, 207, 0.1));
+            border-color: rgba(44, 123, 229, 0.4);
+        }
+
+        .event-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .event-tag {
+            padding: 6px 14px;
+            background: rgba(31, 95, 209, 0.1);
+            border: 1px solid rgba(31, 95, 209, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #1f5fd1;
+            font-weight: 500;
+        }
+
+        .no-events-msg {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7c96;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .events-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .event-card {
+                padding: 25px;
+            }
+
+            .event-title {
+                font-size: 1.5rem;
+            }
+
+            .event-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .event-gallery img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="live-bg"></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand brand" href="index.html">
+            <img src="assets/logo.png" alt="ACM SIGCHI Logo">
+            ACM SIGCHI SRM
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Events Hero -->
+<section class="events-hero">
+    <div class="container">
+        <h1>Events</h1>
+        <p>
+            Explore the memorable moments and impactful experiences we've created together. 
+            From workshops to competitions, each event showcases our commitment to innovation and collaboration.
+        </p>
+    </div>
+</section>
+
+<!-- Events Section -->
+<section class="events-section">
+    <div class="container">
+        
+        <!-- Active Events -->
+        <div style="margin-bottom: 80px;">
+            <h2 class="category-title" style="font-size: 2.2rem; font-weight: 700; color: #1f5fd1; margin-bottom: 35px; text-align: center; position: relative; padding-bottom: 15px;">
+                <span style="display: inline-block;">Active Events</span>
+            </h2>
+            <div style="background: linear-gradient(135deg, rgba(31, 95, 209, 0.05), rgba(26, 142, 207, 0.05)); border: 2px dashed rgba(31, 95, 209, 0.2); border-radius: 20px; padding: 60px 40px; text-align: center;">
+                <i class="fas fa-calendar-check" style="font-size: 4rem; color: #2c7be5; margin-bottom: 20px; opacity: 0.3; display: block;"></i>
+                <h3 style="color: #2c7be5; font-weight: 600; margin-bottom: 15px;">No Active Events Yet</h3>
+                <p style="color: #6b7c96; font-size: 1.05rem; margin-bottom: 25px;">Stay tuned for exciting upcoming workshops, hackathons, and tech talks!</p>
+                <a href="index.html#contact" class="notify-btn">Get Notified</a>
+            </div>
+        </div>
+
+        <!-- Past Events -->
+        <div>
+            <h2 class="category-title" style="font-size: 2.2rem; font-weight: 700; color: #1f5fd1; margin-bottom: 35px; text-align: center; position: relative; padding-bottom: 15px;">
+                <span style="display: inline-block;">Past Events</span>
+            </h2>
+        </div>
+        
+        <!-- Sample Event Card 1 -->
+        <div class="event-card">
+            <div class="event-header">
+                <h2 class="event-title">HCI Workshop 2025</h2>
+                <span class="event-date"><i class="far fa-calendar"></i> January 15, 2026</span>
+            </div>
+            <p class="event-description">
+                An intensive workshop on Human-Computer Interaction principles, covering user research, 
+                prototyping, and usability testing. Students created interactive prototypes and learned 
+                industry-standard design thinking methodologies.
+            </p>
+            <div class="event-tags">
+                <span class="event-tag">Workshop</span>
+                <span class="event-tag">HCI</span>
+                <span class="event-tag">Design</span>
+            </div>
+            <div class="event-gallery">
+                <!-- Add your event photos here -->
+                <!-- Example: <img src="assets/events/hci-workshop-1.jpg" alt="HCI Workshop"> -->
+                <div style="text-align: center; padding: 40px; background: #f5f7fa; border-radius: 12px; grid-column: 1/-1;">
+                    <i class="fas fa-images" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 10px;"></i>
+                    <p style="color: #6b7c96; margin: 0;">Add event photos here</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Event Card 2 -->
+        <div class="event-card">
+            <div class="event-header">
+                <h2 class="event-title">Design Hackathon 2025</h2>
+                <span class="event-date"><i class="far fa-calendar"></i> December 10, 2025</span>
+            </div>
+            <p class="event-description">
+                A 24-hour design challenge where teams competed to create innovative solutions 
+                addressing real-world problems. Participants worked on UI/UX design, prototyping, 
+                and presenting their solutions to industry experts.
+            </p>
+            <div class="event-tags">
+                <span class="event-tag">Hackathon</span>
+                <span class="event-tag">Competition</span>
+                <span class="event-tag">Innovation</span>
+            </div>
+            <div class="event-gallery">
+                <!-- Add your event photos here -->
+                <div style="text-align: center; padding: 40px; background: #f5f7fa; border-radius: 12px; grid-column: 1/-1;">
+                    <i class="fas fa-images" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 10px;"></i>
+                    <p style="color: #6b7c96; margin: 0;">Add event photos here</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Event Card 3 -->
+        <div class="event-card">
+            <div class="event-header">
+                <h2 class="event-title">Tech Talk: Future of AI</h2>
+                <span class="event-date"><i class="far fa-calendar"></i> November 22, 2025</span>
+            </div>
+            <p class="event-description">
+                An engaging session featuring industry leaders discussing the intersection of 
+                artificial intelligence and human-centered design. Topics included ethical AI, 
+                machine learning applications, and the future of human-machine interaction.
+            </p>
+            <div class="event-tags">
+                <span class="event-tag">Tech Talk</span>
+                <span class="event-tag">AI</span>
+                <span class="event-tag">Guest Speaker</span>
+            </div>
+            <div class="event-gallery">
+                <!-- Add your event photos here -->
+                <div style="text-align: center; padding: 40px; background: #f5f7fa; border-radius: 12px; grid-column: 1/-1;">
+                    <i class="fas fa-images" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 10px;"></i>
+                    <p style="color: #6b7c96; margin: 0;">Add event photos here</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

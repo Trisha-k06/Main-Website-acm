@@ -1,0 +1,60 @@
+{
+  "leadership": [
+    {
+      "name": "Mayukh Tilak",
+      "position": "Chairperson",
+      "bio": "A brief introduction about your role and vision.",
+      "image": null,
+      "linkedIn": "#"
+    },
+    {
+      "name": "Vratiks Bawangade",
+      "position": "Vice Chairperson",
+      "bio": "A brief introduction about your role and responsibilities.",
+      "image": null,
+      "linkedIn": "#"
+    },
+    {
+      "name": "Kironmoy Mukherjee",
+      "position": "Secretary",
+      "bio": "A brief introduction about your role and contributions.",
+      "image": "assets/photos/secretary.jpeg",
+      "linkedIn": "https://www.linkedin.com/in/kironmoy-mukherjee-40510329a/"
+    },
+    {
+      "name": "Vinisha Sahoo",
+      "position": "Treasurer",
+      "bio": "I'm interested in tech, organizing events, and building creative ideas into real projects. I enjoy working with teams, learning new things, and taking initiative when something needs to get done.",
+      "image": "assets/photos/treasurer.jpeg",
+      "linkedIn": "https://www.linkedin.com/in/vinisha-sahoo"
+    },
+    {
+      "name": "Dhruv Jha",
+      "position": "Web Master",
+      "bio": "Godspeed.",
+      "image": "assets/photos/webmaster.jpeg",
+      "linkedIn": "https://www.linkedin.com/in/dhruv-jha/"
+    },
+    {
+      "name": "Trisha Kumar",
+      "position": "Technical Lead",
+      "bio": "A brief introduction about your role and technical expertise.",
+      "image": null,
+      "linkedIn": "https://www.linkedin.com/in/trisha-kumar-22516a2b1/"
+    },
+    {
+      "name": "Shabrimuthu",
+      "position": "Non Technical Lead",
+      "bio": "I enjoy meeting new people and forming connections that outlast events. Passionate about getting the boat to sail further than before, happy to make your acquaintance",
+      "image": "assets/photos/ntlead.jpeg",
+      "linkedIn": "#"
+    },
+    {
+      "name": "Esha Evalene Aakula",
+      "position": "Creatives Lead",
+      "bio": "I enjoy designing, brainstorming concepts, and bringing ideas to life through visuals and content.",
+      "image": "assets/photos/clead.jpeg",
+      "linkedIn": "https://www.linkedin.com/in/esha-evalene-aakula/"
+    }
+  ]
+}
