@@ -72,6 +72,25 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border-left: 4px solid #2c7be5;
+            
+            /* New: two-column layout */
+            display: flex;
+            align-items: stretch;
+            gap: 30px;
+        }
+
+        .event-content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .event-media {
+            flex: 1.1; /* slightly smaller column so it feels less huge */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
         }
 
         .event-card:hover {
@@ -81,11 +100,10 @@
 
         .event-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 18px;
         }
 
         .event-title {
@@ -96,9 +114,16 @@
         }
 
         .event-date {
-            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            font-size: 0.9rem;
             color: #6b7c96;
             font-weight: 500;
+            background: rgba(31, 95, 209, 0.06);
+            border-radius: 999px;
+            border: 1px solid rgba(31, 95, 209, 0.15);
         }
 
         .event-description {
@@ -109,34 +134,55 @@
         }
 
         .event-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            /* Right-side media box: portrait-style poster */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 260px; /* reduce width so it doesn't dominate */
+            aspect-ratio: 3 / 4; /* taller than it is wide */
+            margin-top: 0;
+            padding: 10px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Variant for more square posters (e.g., Pythoneers) */
+        .event-gallery-square {
+            aspect-ratio: 1 / 1;
         }
 
         .event-gallery img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
+            height: 100%;
+            object-fit: contain; /* show full poster without cutting */
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
 
         .event-gallery img:hover {
-            transform: scale(1.05);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
         }
 
-        .event-gallery > div {
+        .event-placeholder {
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, rgba(44, 123, 229, 0.05), rgba(26, 142, 207, 0.05));
             border: 2px dashed rgba(44, 123, 229, 0.2);
             border-radius: 12px;
             transition: all 0.3s ease;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .event-gallery > div:hover {
+        .event-placeholder:hover {
             background: linear-gradient(135deg, rgba(44, 123, 229, 0.1), rgba(26, 142, 207, 0.1));
             border-color: rgba(44, 123, 229, 0.4);
         }
@@ -172,6 +218,13 @@
 
             .event-card {
                 padding: 25px;
+                flex-direction: column;
+            }
+
+            .event-media {
+                width: 100%;
+                justify-content: center;
+                margin-top: 20px;
             }
 
             .event-title {
@@ -179,11 +232,8 @@
             }
 
             .event-gallery {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-
-            .event-gallery img {
-                height: 150px;
+                max-width: 320px;
+                margin: 0 auto;
             }
         }
     </style>
@@ -249,78 +299,110 @@
             </h2>
         </div>
         
-        <!-- Sample Event Card 1 -->
+        <!-- Assemble. Connect. Conquer the Code. (API Mastery Workshop) - 27 Oct 2025 -->
         <div class="event-card">
-            <div class="event-header">
-                <h2 class="event-title">HCI Workshop 2025</h2>
-                <span class="event-date"><i class="far fa-calendar"></i> January 15, 2026</span>
+            <div class="event-content">
+                <div class="event-header">
+                    <h2 class="event-title">Assemble. Connect. Conquer the Code.</h2>
+                    <span class="event-date"><i class="far fa-calendar"></i> October 27, 2025</span>
+                </div>
+                <p class="event-description">
+                    A complete workshop in API mastery covering client–server fundamentals, Postman workflows,
+                    and JSON-based integrations. Participants explored how to design, test, and debug modern APIs
+                    through hands-on labs and guided examples.
+                </p>
+                <div class="event-tags">
+                    <span class="event-tag">Workshop</span>
+                    <span class="event-tag">APIs</span>
+                    <span class="event-tag">Postman</span>
+                </div>
+                <div class="event-tags" style="margin-top: 10px;">
+                    <span class="event-tag">Speaker: Harish Narayanasamy</span>
+                    <span class="event-tag">Venue: Latrobe Lab (Tech Park)</span>
+                </div>
             </div>
-            <p class="event-description">
-                An intensive workshop on Human-Computer Interaction principles, covering user research, 
-                prototyping, and usability testing. Students created interactive prototypes and learned 
-                industry-standard design thinking methodologies.
-            </p>
-            <div class="event-tags">
-                <span class="event-tag">Workshop</span>
-                <span class="event-tag">HCI</span>
-                <span class="event-tag">Design</span>
-            </div>
-            <div class="event-gallery">
-                <!-- Add your event photos here -->
-                <!-- Example: <img src="assets/events/hci-workshop-1.jpg" alt="HCI Workshop"> -->
-                <div style="text-align: center; padding: 40px; background: #f5f7fa; border-radius: 12px; grid-column: 1/-1;">
-                    <i class="fas fa-images" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 10px;"></i>
-                    <p style="color: #6b7c96; margin: 0;">Add event photos here</p>
+            <div class="event-media">
+                <div class="event-gallery">
+                    <img src="assets/photos/assemble.jpeg" alt="Assemble. Connect. Conquer the Code. poster">
                 </div>
             </div>
         </div>
 
-        <!-- Sample Event Card 2 -->
+        <!-- Full Stack Development with AI - 25 Apr 2025 -->
         <div class="event-card">
-            <div class="event-header">
-                <h2 class="event-title">Design Hackathon 2025</h2>
-                <span class="event-date"><i class="far fa-calendar"></i> December 10, 2025</span>
+            <div class="event-content">
+                <div class="event-header">
+                    <h2 class="event-title">Full Stack Development with AI</h2>
+                    <span class="event-date"><i class="far fa-calendar"></i> April 25, 2025</span>
+                </div>
+                <p class="event-description">
+                    A hands-on session on building and deploying full‑stack web applications using modern frameworks
+                    and AI tools. Students learned how to connect Angular frontends with serverless backends and
+                    cloud databases, and how to ship production‑ready apps.
+                </p>
+                <div class="event-tags">
+                    <span class="event-tag">Workshop</span>
+                    <span class="event-tag">Full Stack</span>
+                    <span class="event-tag">AI</span>
+                </div>
+                <div class="event-tags" style="margin-top: 10px;">
+                    <span class="event-tag">Venue: iMAC Lab, 14th Floor</span>
+                </div>
             </div>
-            <p class="event-description">
-                A 24-hour design challenge where teams competed to create innovative solutions 
-                addressing real-world problems. Participants worked on UI/UX design, prototyping, 
-                and presenting their solutions to industry experts.
-            </p>
-            <div class="event-tags">
-                <span class="event-tag">Hackathon</span>
-                <span class="event-tag">Competition</span>
-                <span class="event-tag">Innovation</span>
-            </div>
-            <div class="event-gallery">
-                <!-- Add your event photos here -->
-                <div style="text-align: center; padding: 40px; background: #f5f7fa; border-radius: 12px; grid-column: 1/-1;">
-                    <i class="fas fa-images" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 10px;"></i>
-                    <p style="color: #6b7c96; margin: 0;">Add event photos here</p>
+            <div class="event-media">
+                <div class="event-gallery">
+                    <img src="assets/photos/fsd.jpeg" alt="Full Stack Development with AI poster">
                 </div>
             </div>
         </div>
 
-        <!-- Sample Event Card 3 -->
+        <!-- Synergy 2025 - 25–26 Mar 2025 -->
         <div class="event-card">
-            <div class="event-header">
-                <h2 class="event-title">Tech Talk: Future of AI</h2>
-                <span class="event-date"><i class="far fa-calendar"></i> November 22, 2025</span>
+            <div class="event-content">
+                <div class="event-header">
+                    <h2 class="event-title">Synergy 2025</h2>
+                    <span class="event-date"><i class="far fa-calendar"></i> March 25–26, 2025</span>
+                </div>
+                <p class="event-description">
+                    A flagship 2‑day fest bringing together a mix of technical and non‑technical events. From
+                    coding challenges and bug bounty hunts to photography, art competitions, and roast &amp; boast,
+                    Synergy celebrated creativity, collaboration, and community.
+                </p>
+                <div class="event-tags">
+                    <span class="event-tag">Flagship Fest</span>
+                    <span class="event-tag">Tech &amp; Non‑Tech</span>
+                    <span class="event-tag">Competition</span>
+                </div>
             </div>
-            <p class="event-description">
-                An engaging session featuring industry leaders discussing the intersection of 
-                artificial intelligence and human-centered design. Topics included ethical AI, 
-                machine learning applications, and the future of human-machine interaction.
-            </p>
-            <div class="event-tags">
-                <span class="event-tag">Tech Talk</span>
-                <span class="event-tag">AI</span>
-                <span class="event-tag">Guest Speaker</span>
+            <div class="event-media">
+                <div class="event-gallery">
+                    <img src="assets/photos/synergy.jpeg" alt="Synergy 2025 poster">
+                </div>
             </div>
-            <div class="event-gallery">
-                <!-- Add your event photos here -->
-                <div style="text-align: center; padding: 40px; background: #f5f7fa; border-radius: 12px; grid-column: 1/-1;">
-                    <i class="fas fa-images" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 10px;"></i>
-                    <p style="color: #6b7c96; margin: 0;">Add event photos here</p>
+        </div>
+
+        <!-- Pythoneers: Code Create Conquer - 31 Aug 2024 -->
+        <div class="event-card">
+            <div class="event-content">
+                <div class="event-header">
+                    <h2 class="event-title">Pythoneers: Code Create Conquer</h2>
+                    <span class="event-date"><i class="far fa-calendar"></i> August 31, 2024</span>
+                </div>
+                <p class="event-description">
+                    An online Python‑focused event where participants built creative solutions and sharpened their
+                    problem‑solving skills. Prizes were awarded for the most innovative ideas, best solutions, and
+                    standout presentations.
+                </p>
+                <div class="event-tags">
+                    <span class="event-tag">Online</span>
+                    <span class="event-tag">Python</span>
+                    <span class="event-tag">Competition</span>
+                </div>
+                <!-- Time removed as per design preference -->
+            </div>
+            <div class="event-media">
+                <div class="event-gallery event-gallery-square">
+                    <img src="assets/photos/Pythoneers.jpeg" alt="Pythoneers: Code Create Conquer poster">
                 </div>
             </div>
         </div>
